@@ -10,16 +10,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Console {
-    private static final String ERROR_NUMBER_OUT_OF_RANGE = " ! Некорректный ввод: число не в диапазоне";
-    private static final String ERROR_NOT_A_NUMBER = " ! Некорректный ввод: ожидается число";
-    private static final String ERROR_CELL_IS_WALL = " ! Некорректный ввод: выбранная ячейка является стеной";
-    private static final String ERROR_START_EQUALS_END = " ! Некорректный ввод: начальная и конечная точки совпадают";
+    public static final String ERROR_NUMBER_OUT_OF_RANGE = " ! Некорректный ввод: число не в диапазоне";
+    public static final String ERROR_NOT_A_NUMBER = " ! Некорректный ввод: ожидается число";
+    public static final String ERROR_CELL_IS_WALL = " ! Некорректный ввод: выбранная ячейка является стеной";
+    public static final String ERROR_START_EQUALS_END = " ! Некорректный ввод: начальная и конечная точки совпадают";
+    public static final String ERROR_NO_WAY = " ! Путь не найден";
 
-    private static final char CELL_WALL = '\u2B1B';
-    private static final char CELL_PASSAGE = '\u2B1C';
-    private static final String CELL_START = "\uD83C\uDD70\uFE0F";
-    private static final String CELL_END = "\uD83C\uDD71\uFE0F";
-    private static final String CELL_PATH = "\uD83D\uDFE8";
+    public static final char CELL_WALL = '\u2B1B';
+    public static final char CELL_PASSAGE = '\u2B1C';
+    public static final String CELL_START = "\uD83C\uDD70\uFE0F";
+    public static final String CELL_END = "\uD83C\uDD71\uFE0F";
+    public static final String CELL_PATH = "\uD83D\uDFE8";
 
     private final Scanner scanner;
     private final PrintWriter writer;

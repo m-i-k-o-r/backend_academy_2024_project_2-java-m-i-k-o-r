@@ -52,7 +52,7 @@ public class MazeApp {
         Solver selectedSolver = selectSolver();
         List<Coordinate> path = selectedSolver.solve(maze, start, end);
         if (path.isEmpty()) {
-            console.println(" ! Путь не найден");
+            console.println(Console.ERROR_NO_WAY);
         } else {
             console.render(maze, start, end, path);
         }
