@@ -36,13 +36,13 @@ public class Console {
         this.writer = new PrintWriter(writer, true);
     }
 
-    public int getValidInput(String prompt, int maxValue) {
+    public int getValidInput(String prompt, int minValue, int maxValue) {
         while (true) {
             print(prompt);
             if (scanner.hasNextInt()) {
                 int input = scanner.nextInt();
 
-                if (input >= 0 && input <= maxValue) {
+                if (input >= minValue && input <= maxValue) {
                     return input;
                 } else {
                     println(ERROR_NUMBER_OUT_OF_RANGE);
@@ -52,6 +52,10 @@ public class Console {
             }
             scanner.nextLine();
         }
+    }
+
+    public int getValidInput(String prompt, int maxValue) {
+        return getValidInput(prompt, 0, maxValue);
     }
 
     private String formatPrompt(String type, int maxValue) {
@@ -100,11 +104,6 @@ public class Console {
                 println(ERROR_CELL_IS_WALL);
             }
         }
-    }
-
-    public String getStringInput(String prompt) {
-        print(prompt);
-        return scanner.next();
     }
 
     public void println() {
