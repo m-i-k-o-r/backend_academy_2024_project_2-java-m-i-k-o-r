@@ -5,6 +5,9 @@ import backend.academy.generators.Generator;
 import backend.academy.generators.RecursiveBacktrackerMazeGenerator;
 import backend.academy.models.Coordinate;
 import backend.academy.models.Maze;
+import backend.academy.solvers.BfsSolver;
+import backend.academy.solvers.DijkstraSolver;
+import backend.academy.solvers.Solver;
 import java.util.List;
 import lombok.experimental.UtilityClass;
 
@@ -45,5 +48,27 @@ public class Main {
         Coordinate end = console.setEndPoint(maze, start);
 
         console.render(maze, start, end);
+
+        List<Solver> solvers = List.of(
+            new BfsSolver(),
+            new DijkstraSolver()
+        );
+
+        console.println("Выберите алгоритм поиска пути:");
+        for (int i = 0; i < solvers.size(); i++) {
+            console.println(i + ": " + solvers.get(i).name());
+        }
+        Solver selectedSolver = solvers.get(
+            console.getValidInput(
+                "Введите номер алгоритма поиска пути из списка > ",
+                solvers.size()
+            )
+        );
+        List<Coordinate> path = selectedSolver.solve(maze, start, end);
+        if (path.isEmpty()) {
+            console.println(" ! Путь не найден");
+        } else {
+            console.render(maze, start, end, path);
+        }
     }
 }

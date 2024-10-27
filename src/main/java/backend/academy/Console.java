@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Console {
-    private final Scanner scanner;
-    private final PrintWriter writer;
-
     private static final String ERROR_NUMBER_OUT_OF_RANGE = " ! Некорректный ввод: число не в диапазоне";
     private static final String ERROR_NOT_A_NUMBER = " ! Некорректный ввод: ожидается число";
     private static final String ERROR_CELL_IS_WALL = " ! Некорректный ввод: выбранная ячейка является стеной";
@@ -22,6 +19,10 @@ public class Console {
     private static final char CELL_PASSAGE = '\u2B1C';
     private static final String CELL_START = "\uD83C\uDD70\uFE0F";
     private static final String CELL_END = "\uD83C\uDD71\uFE0F";
+    private static final String CELL_PATH = "\uD83D\uDFE8";
+
+    private final Scanner scanner;
+    private final PrintWriter writer;
 
     public Console() {
         this(
@@ -161,8 +162,30 @@ public class Console {
         println(sb.toString());
     }
 
-    public void render(Maze maze, List<Coordinate> path) {
+    public void render(Maze maze, Coordinate start, Coordinate end, List<Coordinate> path) {
+        StringBuilder sb = new StringBuilder();
 
+        for (int row = 0; row < maze.height(); row++) {
+            for (int col = 0; col < maze.width(); col++) {
+                if (row == start.row() && col == start.col()) {
+                    sb.append(CELL_START);
+                } else if (row == end.row() && col == end.col()) {
+                    sb.append(CELL_END);
+                } else if (path.contains(new Coordinate(row, col))) {
+                    sb.append(CELL_PATH);
+                } else {
+                    Cell cell = maze.grid()[row][col];
+                    if (cell.type() == Cell.Type.WALL) {
+                        sb.append(CELL_WALL);
+                    } else {
+                        sb.append(CELL_PASSAGE);
+                    }
+                }
+            }
+            sb.append('\n');
+        }
+
+        println(sb.toString());
     }
 
     public void close() {
